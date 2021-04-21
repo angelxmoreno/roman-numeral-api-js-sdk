@@ -22,12 +22,7 @@ export class Client {
 
     constructor(apiKey?: string, serverUrl: string = DEFAULT_BASE_URL, http?: AxiosInstance) {
         this.serverUrl = serverUrl;
-        this.http =
-            http ||
-            axios.create({
-                headers: { Authorization: `Bearer ${apiKey}` },
-                baseURL: this.serverUrl,
-            });
+        this.http = http || axios.create();
         this.apiKey = apiKey;
     }
 
@@ -43,7 +38,7 @@ export class Client {
 
     protected async callRemote(number: number | string, type: 'roman' | 'decimal'): Promise<ServerResponseSuccess> {
         try {
-            const { data } = await this.http.get<ServerResponseSuccess>(`/api/v1/to-${type}`, {
+            const { data } = await this.http.get<ServerResponseSuccess>(`${this.serverUrl}/api/v1/to-${type}`, {
                 params: { number, api_key: this.apiKey },
             });
             return data;
