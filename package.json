@@ -2,8 +2,8 @@
     "name": "roman-numeral-api-js-sdk",
     "version": "1.0.1",
     "description": "The official RomanNumeralApi javascript SDK",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "main": "dist/Client.js",
+    "types": "dist/Client.d.ts",
     "files": [
         "dist/"
     ],

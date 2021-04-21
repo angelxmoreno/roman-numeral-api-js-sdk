@@ -1,6 +1,6 @@
 import 'mocha';
 import chai = require('chai');
-import { Client } from '../src';
+import { Client } from '../src/Client';
 
 const LAST_PARAM = process.argv[process.argv.length - 1];
 const API_KEY = LAST_PARAM.split('=')[1];

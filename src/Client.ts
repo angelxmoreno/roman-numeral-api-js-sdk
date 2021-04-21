@@ -2,20 +2,13 @@ import axios, { AxiosInstance } from 'axios';
 
 const DEFAULT_BASE_URL = 'https://main-roman-n-xftfaobya50dx7jw-gtw.qovery.io';
 
-export type ServerResponseSuccess = {
+type ServerResponse = {
     romanNumber: string;
     decimalNumber: number;
     userType: string;
 };
 
-export type ServerResponseError = {
-    status: number;
-    message: string;
-};
-
-export type ServerResponse = ServerResponseSuccess | ServerResponseError;
-
-export class Client {
+class Client {
     serverUrl: string;
     http: AxiosInstance;
     apiKey?: string;
@@ -36,9 +29,9 @@ export class Client {
         return decimalNumber;
     }
 
-    protected async callRemote(number: number | string, type: 'roman' | 'decimal'): Promise<ServerResponseSuccess> {
+    protected async callRemote(number: number | string, type: 'roman' | 'decimal'): Promise<ServerResponse> {
         try {
-            const { data } = await this.http.get<ServerResponseSuccess>(`${this.serverUrl}/api/v1/to-${type}`, {
+            const { data } = await this.http.get<ServerResponse>(`${this.serverUrl}/api/v1/to-${type}`, {
                 params: { number, api_key: this.apiKey },
             });
             return data;
@@ -51,3 +44,5 @@ export class Client {
         }
     }
 }
+
+export { Client, ServerResponse };
